@@ -27,14 +27,15 @@ public class DriverTrain extends SubsystemBase {
     setDefaultCommand(new TankDrive());
   }
 
-  public void setLeftMotors(double speed)
+  public void rotate(double speed){
+    motorLeft1.set(ControlMode.PercentOutput, speed);
+    motorLeft2.set(ControlMode.PercentOutput, speed);
+  }
+
+  public void movement(double speed)
   {
     motorLeft1.set(ControlMode.PercentOutput, -speed);
     motorLeft2.set(ControlMode.PercentOutput, -speed);
-  }
-
-  public void setRightMotors(double speed)
-  {
     motorRight1.set(ControlMode.PercentOutput, speed);
     motorRight2.set(ControlMode.PercentOutput, speed);
   }

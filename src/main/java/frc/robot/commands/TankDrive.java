@@ -4,6 +4,7 @@
 
 package frc.robot.commands;
 
+import edu.wpi.first.networktables.LogMessage;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Robot;
 import frc.robot.RobotMap;
@@ -17,25 +18,39 @@ public class TankDrive extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-
-    
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    double leftStickY = Robot.m_oi.GetDriverRawAxis(RobotMap.LEFT_STICK_Y);
-    double rightStickY = Robot.m_oi.GetDriverRawAxis(RobotMap.RIGHT_STICK_Y);
+    double xAxis = Robot.m_oi.GetDriverRawAxis(RobotMap.STICK_X);
+    double yAxis = Robot.m_oi.GetDriverRawAxis(RobotMap.STICK_Y);
 
-    Robot.driverTrain.setLeftMotors(leftStickY);
-    Robot.driverTrain.setRightMotors(rightStickY);
+    if(xAxis > 0 || xAxis < 0){
+      if(yAxis > 0 || yAxis < 0){
+        Robot.driverTrain.movement(xAxis);  
+      }
+      Robot.driverTrain.rotate(xAxis);
+    }
+
+    // Robot.driverTrain.movement(xAxis);
+    // if(Robot.m_oi.getJoystick().getX() != 0)
+    // {
+    //     Robot.driverTrain.rotate(xAxis);
+    // }
+    // else
+    // {
+    //   Robot.driverTrain.m(yAxis);
+    // }
+
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    Robot.driverTrain.setLeftMotors(0);
-    Robot.driverTrain.setRightMotors(0);
+    Robot.driverTrain.movement(0);
+    Robot.driverTrain.rotate(0);
+
   }
 
   // Returns true when the command should end.

@@ -4,24 +4,19 @@
 
 package frc.robot;
 
-import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.Joystick;
 
 /** Add your docs here. */
 public class OI {
 
-XboxController driverController = new XboxController(RobotMap.DRIVER_CONTROLLER);
+    Joystick driverController = new Joystick(RobotMap.DRIVER_CONTROLLER);
+    public double GetDriverRawAxis(int axis)
+    {
+        return driverController.getRawAxis(axis);
+    }
 
-public double GetDriverRawAxis(int axis)
-{
-    return driverController.getRawAxis(axis);
-}
-
-
-
-
-
-
-
-
-
+    public Joystick getJoystick()
+    {
+        return driverController;
+    }
 }
