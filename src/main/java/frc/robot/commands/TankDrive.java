@@ -26,12 +26,19 @@ public class TankDrive extends CommandBase {
     double xAxis = Robot.m_oi.GetDriverRawAxis(RobotMap.STICK_X);
     double yAxis = Robot.m_oi.GetDriverRawAxis(RobotMap.STICK_Y);
 
-    if(xAxis > 0 || xAxis < 0){
-      if(yAxis > 0 || yAxis < 0){
-        Robot.driverTrain.movement(xAxis);  
-      }
-      Robot.driverTrain.rotate(xAxis);
-    }
+    if(xAxis > 0)
+      Robot.driverTrain.rotateRight(xAxis);
+
+    if(xAxis < 0)
+      Robot.driverTrain.rotateLeft(xAxis);
+      
+
+    //   if(yAxis > 0 || yAxis < 0){
+    //     Robot.driverTrain.movement(yAxis);  
+    //   }else{
+    //   Robot.driverTrain.rotate(xAxis);
+    // }
+    
 
     // Robot.driverTrain.movement(xAxis);
     // if(Robot.m_oi.getJoystick().getX() != 0)
@@ -49,7 +56,8 @@ public class TankDrive extends CommandBase {
   @Override
   public void end(boolean interrupted) {
     Robot.driverTrain.movement(0);
-    Robot.driverTrain.rotate(0);
+    Robot.driverTrain.rotateLeft(0);
+    Robot.driverTrain.rotateRight(0);
 
   }
 
