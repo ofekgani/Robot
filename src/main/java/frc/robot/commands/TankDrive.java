@@ -8,6 +8,7 @@ import edu.wpi.first.networktables.LogMessage;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Robot;
 import frc.robot.RobotMap;
+import frc.robot.subsystems.GaniPower;
 
 public class TankDrive extends CommandBase {
   /** Creates a new TankDrive. */
@@ -23,16 +24,13 @@ public class TankDrive extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    double xAxis = Robot.m_oi.GetDriverRawAxis(RobotMap.STICK_X);
-    double yAxis = Robot.m_oi.GetDriverRawAxis(RobotMap.STICK_Y);
+    double xAxis = Robot.m_oi.GetDriverRawAxis(RobotMap.STICK_Y);
+    double yAxis = Robot.m_oi.GetDriverRawAxis(RobotMap.STICK_X);
+    Robot.m_oi.GetButton();
 
-    if(xAxis > 0)
-      Robot.driverTrain.rotateRight(xAxis);
 
-    if(xAxis < 0)
-      Robot.driverTrain.rotateLeft(xAxis);
+    Robot.driverTrain.ArcadeDrive(-xAxis,yAxis,true);
       
-
     //   if(yAxis > 0 || yAxis < 0){
     //     Robot.driverTrain.movement(yAxis);  
     //   }else{
@@ -55,10 +53,13 @@ public class TankDrive extends CommandBase {
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    Robot.driverTrain.movement(0);
-    Robot.driverTrain.rotateLeft(0);
-    Robot.driverTrain.rotateRight(0);
+    Robot.driverTrain.ArcadeDrive(0,0,false);
 
+
+  }
+
+  public void shoot() {
+      
   }
 
   // Returns true when the command should end.
