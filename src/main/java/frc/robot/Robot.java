@@ -20,7 +20,7 @@ public class Robot extends TimedRobot {
   public static DriverTrain driverTrain = new DriverTrain();
 
   private Command m_autonomousCommand;
-
+int i=5;
   public static OI m_oi;
 
 public static Object robotType;
